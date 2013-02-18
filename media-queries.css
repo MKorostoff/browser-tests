@@ -11,24 +11,32 @@ body {
 
 .test-block {
 	display: none;
-	width: 96px;
+	width: 1in;
 	height: 1in;
 	margin: 1em auto;
 	color: black;
 	background-color: white;
 	font-family: arial;
 	text-align: center;
+	font-size: 10px;
 }
 
-.test-block.no-res {
+.test-block.96-pixels {
+	width: 96px;
+}
+
+.test-block.no-res,
+.test-block.device-dpi {
 	display: block;
 }
 
 .test-block h2 {
-	display: table-cell;
-	height: 1in;
 	font-size: 13px;
-	vertical-align: middle;
+	text-align: center;
+}
+
+.test-block p {
+	font-size: 8px;
 	text-align: center;
 }
 

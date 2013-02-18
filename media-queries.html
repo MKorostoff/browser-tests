@@ -9,24 +9,34 @@
 </h1>
 <?php for ($width=260; $width<=1400; $width++) { ?>
 <div class="test-block <?php print 'width-' . $width;?>">
-<h2>width: <?php print $width . 'px'?></h2>
+<h2>width: </h2><?php print $width . 'px'?>
+<p>This block is 1 inch</p>
 </div>
 <?php } ?>
 
 <?php for ($device_width=320; $device_width<=3000; $device_width++) { ?>
-<div class="test-block <?php print 'device-width-' . $device_width;?>">
-<h2>device width: <?php print $device_width . 'px'?></h2>
+<div class="test-block 96-pixels <?php print 'device-width-' . $device_width;?>">
+<h2>device width: </h2><?php print $device_width . 'px'?>
+<p>this block is 96 pixels</p>
 </div>
 <?php } ?>
 
 <?php for ($resolution=72; $resolution<=400; $resolution++) { ?>
 <div class="test-block <?php print 'resolution-' . $resolution;?>">
-<h2>resolution: <?php print $resolution . 'dpi'?></h2>
+<h2>resolution as reported by media query: </h2><?php print $resolution . 'dpi'?>
 </div>
 <?php } ?>
 
 <div class="test-block no-res">
-<h2>resolution: not reported by your browser</h2>
+<h2>resolution as reported by media query: </h2>not reported by your browser
+</div>
+
+<div id="dpi-test" class="test-block device-dpi">
+<script>
+// document.write('<p>screen.deviceXDPI: ' + screen.deviceXDPI + '</p>');
+var dpi = document.getElementById("dpi-test").offsetHeight;
+document.write('<h2>Resolution reported by javascript:</h2> ' + dpi + 'dpi');
+</script>
 </div>
 </body>
 </html>
