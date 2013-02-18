@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>...</title>
+<meta name="viewport" content="width=device-width">
+<!--   ...   -->
+<!-- <link href="common.css" rel="stylesheet" type="text/css"> -->
+<script type="text/javascript">
+	/* our ultimate goal here is to determine the physical size of the device, 
+	    so we can then specify different layouts for the different sizes 
+	    HOWEVER doing this is somewhat tricky, because:
+	    a) even after the logical "viewport" has been controlled,
+	       two devices of the same physical size can have wildly different
+	      "px" dimensions because of different densities
+	    b) the CSS "inch" metric is _not_ useful for this purpose, as the
+	      "CSS inch" is _defined_ as 96 pixels, and so may be very different
+	      from what one would measure with a ruler
+	   so to determine size with any accuracy, we first need to determine density,
+	    either as "dots per inch" (a physical metric, 
+	    closer to what a ruler would report than "pixels per inch"), 
+	    or as the density ratio of "dots per inch" to "pixels per inch" 
+	   then we can go on to determine the size
+	   and finally specify loading of the one needed CSS file for that size
+	*/
+
+
+	function formatvalue(numerator, denominator, propertyname) {
+		/* this routine formats a value either as a real (decimal) number with 
+		    finite precision, or as a ratio (fraction) of integers,
+		    as appropriate to the query
+		   its parameters must be in terms of a ratio of integers, 
+		    because converting ratio->real whenever necessary is simple, 
+		    but converting real->ratio whenever necessary would be more difficult
+		*/
+		/* (this function works quickly and lightly by assuming that the 
+		    "propertyname" argument is all lower case - if "propertyname" 
+		    contains upper case characters, it may not work right)
+		*/
+		/* both numerator and denominator assumed always non-zero,
+		    else another line of code would be needed 
+		    to return correct results no matter what */
+		if (propertyname.indexOf('ratio') >= 0) return(numerator + '/' + denominator);
+		else return((numerator/denominator).toFixed(2));
+	}
+
+
+	var i, j = 0, k, l = 0;
+	/* indices for loops etc., 
+	    in the end these encode the intermediate and final results
+	   note we _assume_ these are never out of range nor negative when read,
+	    which will be true in the code that follows, but may not be true 
+	    and so cause bad behavior if portions of this code are transplanted 
+	    without sufficient care
+	   i == index which density resolution test works, reversed (0 => no usable query supported):
+	    resolution(dppx), resolution(dpi), -webkit-device-resolution,
+	    -moz-device-resolution, -o-device-resolution, none 
+	   j == resolution as determined, reversed (0 => could not determine density):
+	    2+/xhi, 1.5/hi, 1/med, 0.75/lo, ?/no
+	   k == breakpoints:
+	    minimum px for unknown size, minimum px for size tablet, 
+	    minimum px for size desktop, minimum px for size widescreen,
+	    minimum px for size widescreen if aspect ratio is clearly elongated
+	   l == determined size category (0 => no additional CSS file needed):
+	    handheld/default, tablet, desktop, widescreen
+	*/
+
+	/* try to get devicePixelRatio either by calculating it from Javascript vars (if possible),
+	    or taking it directly from a Javascript variable (if available),
+	    or else from the matchMedia(...) function (if available)
+	    (the relatively new matchMedia(...) function provides easy access
+	    to arbitrary Media Queries from within Javascript) */ 
+	if (screen.deviceXDPI) {
+		var dPI = screen.deviceXDPI;
+		/* dPI is just a shortcut temporary variable with a very short name */
+		j=1;
+		/* just the existence of any non-zero screen.deviceXDPI variable
+		    sets the default density to "lo-res" (rather than "no-res") */
+		if (dPI > 120) j = 2;
+		if (dPI > 200) j = 3;
+		if (dPI > 280) j = 4;
+	} else if (window.devicePixelRatio) { /* density-from-Javascript variable exists and is not zero */
+		/* ("screen.devicePixelRatio" seems more sensible than "window.devicePixelRatio"
+		     ...but we have to play the hand we're dealt */
+		/* "i" is not set on this path, as we don't need it to determine "j" this way */
+		var dPR = window.devicePixelRatio;
+		/* dPR is just a temporary variable to avoid retyping a long name several times*/
+		j = 1; 	
+		/* just the existence of any non-zero window.devicePixelRatio variable
+		    sets the default density to at least "lo-res" (rather than "no-res") */
+		if (dPR >= 1) j = 2;
+		if (dPR >= 1.5) j = 3;
+		if (dPR >= 2) j = 4;
+		/* note order of statememts above is intentional/necessary, 
+		    as higher density resolutions overwrite lower
+		    so the result is the highest density class that matches */
+		/* also note all values >2 (such as 2.25) will be treated as 2 */
+	} else if (typeof window.matchMedia === 'function') {
+		/* find out which query is supported by asking silly questions
+		    that we know always have positive answers, so we can confidently
+		    interpret a negative answer as "query not supported"
+		   exit loop on first hit 
+		    (more important/common queries are tested first) */
+		var properties = [ '', '-o-min-device-pixel-ratio', 'min--moz-device-pixel-ratio',
+		 '-webkit-min-device-pixel-ratio', 'min-resolution', 'min-resolution' ];
+		var scales = [ 0, 1, 1, 1, 160, 1 ];
+		/* variable "scales" pre-converts queries from "dpi" to "dppx" */
+		var units = [ '', '', '', '', 'dpi', 'dppx' ];
+		/* the above three arrays together (they make no sense separately)
+		    define possible media queries we might use 
+		    (just one identical index is used into all three) */
+		for (i=5; i>0; --i) {
+			if (window.matchMedia('only all and (' + properties[i] + ': ' +
+			 formatvalue(scales[i], 10, properties[i]) + units[i] + ')').matches) break;
+		}
+		/* if no hit, i will be 0 when loop exited */
+		if (i) {
+			/* find out device density resolution by executing several queries,
+			    combining the supported property name we found above with different values */
+			var numerators = [ 0, 3, 1, 3, 2 ];
+			var denominators = [ 1, 4, 1, 2, 1 ];
+			/* the above two arrays together (they make no sense 
+			    separately) define the conventional device density 
+			    resolutions (0, 0.75, 1, 1.5, 2) as fractions */
+			for (j=4; j>0; --j) {
+				if (window.matchMedia('only all and (' + properties[i] + ': ' +
+				 formatvalue(scales[i]*numerators[j], denominators[j], properties[i]) + units[i] + ')').matches) break;
+			}
+			/* if no hit, j will be 0 when loop exited */
+		}
+		/* the case of (!i) [i===0] is already handled by having initialized j = 0 
+		    so the default value is already right in this case */
+	}
+
+	/* density --> breakpoints */
+	k = [ [493, 987, 1481, 1281], [296, 592, 888, 769], [493, 987, 1481, 1281],
+	 [740, 1481, 2221, 1921], [987, 1974, 2962, 2562] ][j];
+	/* the above breakpoints are specified by the user to provide the 
+	    desired behavioral results ...they are not calculated here, 
+	    and they don't make any sense in any "abstract" way */
+	var scrwid = screen.width;
+	var scrhit = screen.height;
+	if (window.outerWidth && window.outerHeight && (window.outerWidth <= (scrwid/2)) && (window.outerHeight <= (scrhit/2))) {
+		/* apparently "meta...viewport..." exists but isn't applied yet
+		    and so the screen dimensions are incorrect,
+		    but correct screen dimensions are available elsewhere anyway */
+		scrwid = window.outerWidth;
+		scrhit = window.outerHeight;
+	}
+	var scrasp = (scrwid/scrhit).toFixed(2);
+	/* use our specified breakpoints to figure out the index of the size category
+	    (i.e. of the required CSSfilename) 
+	   (the tests below are in essence the logic of "our media queries"
+	    ...except expressed in a more succinct way and as Javascript) */
+	if (scrwid >= k[0]) l = 1;
+	if (scrwid >= k[1]) l = 2;
+	if (scrwid >= k[2]) l = 3;
+	if ((scrwid >= k[3]) && (scrasp >= 1.67)) l = 3;
+
+	/* create the correct HTML and insert it into the DOM
+	    (this could also be done with the old -obsolete?- "document.writeln") */
+	if (l) {
+		console.log(l);
+		}
+</script>
+</head>
+<body>
+<!--   ...   -->
+</body>
+</html>

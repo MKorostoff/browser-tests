@@ -1,0 +1,18 @@
+.one-unit {
+	background-color: black;
+	width: 1in;
+	height: 1in;
+	margin: 0 auto;
+}
+
+@media (min-resolution: 30dpi), (-webkit-min-device-pixel-ratio: 1.5) {
+ body {
+ 	background-color: red;
+ }
+}
+
+@media screen and (min-width: 321px) and (max-width: 640px) {
+ body {
+ 	background-color: blue;
+ }
+}

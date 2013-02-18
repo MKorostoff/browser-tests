@@ -1,0 +1,125 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: pdirl 1.0.3\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: René Züwig <rene@newroots.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "seconds"
+msgstr ""
+
+msgid "second"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "minute"
+msgstr ""
+
+msgid "hours"
+msgstr ""
+
+msgid "hour"
+msgstr ""
+
+msgid "days"
+msgstr ""
+
+msgid "day"
+msgstr ""
+
+msgid "weeks"
+msgstr ""
+
+msgid "week"
+msgstr ""
+
+msgid "months"
+msgstr ""
+
+msgid "month"
+msgstr ""
+
+msgid "years"
+msgstr ""
+
+msgid "year"
+msgstr ""
+
+msgid "This directory contains %s element(s) totalling %s %s in size."
+msgstr "Ce dossier contient %s fichier(s) pour un total de %s %s."
+
+msgid "This directory contains no files."
+msgstr "Ce dossier ne contient pas de fichiers."
+
+msgid "%d %s ago"
+msgstr "Il y a %d %s"
+
+msgid "Directory listing for "
+msgstr "Contenu du dossier "
+
+msgid "Parent Directory"
+msgstr "dossier sup&eacute;rieur"
+
+msgid "Back"
+msgstr ""
+
+msgid "Home Directory"
+msgstr ""
+
+msgid "Reload"
+msgstr ""
+
+msgid "Search..."
+msgstr "Chercher..."
+
+msgid "Search for \"%s\" in %s"
+msgstr "Chercher \"%s\" dans %s"
+
+msgid "Found %s element(s) totalling %s %s in size."
+msgstr "%s fichier(s) trouv&eacute;(s) pour un total de %s %s."
+
+msgid "No search result."
+msgstr "Pas de r&eacute;sultat."
+
+msgid "not accesible"
+msgstr ""
+
+msgid "Audio file"
+msgstr ""
+
+msgid "Image file"
+msgstr ""
+
+msgid "Application"
+msgstr ""
+
+msgid "Web document"
+msgstr ""
+
+msgid "Text document"
+msgstr ""
+
+msgid "Directory"
+msgstr ""
+
+msgid "Compressed package"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Last modification"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+

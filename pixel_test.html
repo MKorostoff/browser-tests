@@ -1,0 +1,28 @@
+<html>
+<head>
+</head>
+<body>
+<?php
+$xml = new DOMDocument;
+$xml->preserveWhiteSpace = false;
+$xml->Load('xml/wurfl.xml');
+$xpath = new DOMXPath($xml);
+
+$device_name = 'vk_700_ver1';
+$capability = 'physical_screen_width';
+
+$query = '/wurfl/devices/device[@id=\'' . 
+		$device_name . 
+		'\']/group[@id=\'display\']/capability[@name=\'' . 
+		$capability .
+		'\']';
+
+$entry = $xpath
+	->query($query)
+	->item(0)
+	->getAttribute('value');
+
+print $entry;
+?>
+</body>
+</html>
