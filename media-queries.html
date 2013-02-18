@@ -18,5 +18,11 @@
 <h2>device width: <?php print $device_width . 'px'?></h2>
 </div>
 <?php } ?>
+
+<?php for ($resolution=72; $resolution<=400; $resolution++) { ?>
+<div class="test-block <?php print 'resolution-' . $resolution;?>">
+<h2>resolution: <?php print $resolution . 'dpi'?></h2>
+</div>
+<?php } ?>
 </body>
 </html>

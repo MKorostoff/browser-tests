@@ -45,3 +45,13 @@ print '
 }
 ';
 }
+
+for ($resolution=72;$resolution<=400;$resolution++) {
+print '
+@media screen and (resolution:' . $resolution . 'dpi) {
+ .test-block.resolution-' . $resolution . ' {
+ 	display: block;
+ }
+}
+';
+}
