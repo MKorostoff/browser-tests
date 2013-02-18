@@ -21,14 +21,25 @@ body {
 }
 
 .test-block h2 {
-	padding-top: .35in;
+	font-size: 13px;
+	padding-top: 40%;
 }
 
 <?php
-for ($width=320;$width<=1400;$width++) {
+for ($width=260;$width<=1400;$width++) {
 print '
 @media screen and (width:' . $width . 'px) {
  .test-block.width-' . $width . ' {
+ 	display: block;
+ }
+}
+';
+}
+
+for ($device_width=260;$device_width<=3000;$device_width++) {
+print '
+@media screen and (device-width:' . $device_width . 'px) {
+ .test-block.device-width-' . $device_width . ' {
  	display: block;
  }
 }

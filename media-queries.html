@@ -7,9 +7,15 @@
 <h1>
 	Hello world
 </h1>
-<?php for ($width=320; $width<=1400; $width++) { ?>
+<?php for ($width=260; $width<=1400; $width++) { ?>
 <div class="test-block <?php print 'width-' . $width;?>">
-<h2><?php print $width . 'px'?></h2>
+<h2>width: <?php print $width . 'px'?></h2>
+</div>
+<?php } ?>
+
+<?php for ($device_width=320; $device_width<=3000; $device_width++) { ?>
+<div class="test-block <?php print 'device-width-' . $device_width;?>">
+<h2>device width: <?php print $device_width . 'px'?></h2>
 </div>
 <?php } ?>
 </body>
