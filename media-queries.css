@@ -73,3 +73,16 @@ print '
 }
 ';
 }
+
+for ($pixel_ratio=0;$pixel_ratio<=4.1;$pixel_ratio=$pixel_ratio + .1) {
+print '
+@media screen and (-moz-device-pixel-ratio:' . $pixel_ratio . '),
+screen and (-o-device-pixel-ratio:' . $pixel_ratio . '),
+screen and (-webkit-device-pixel-ratio:' . $pixel_ratio . ') {
+ .test-block.pixel-ratio-' . $pixel_ratio . ' {
+ 	display: block;
+ }
+}
+';
+}
+?>

@@ -9,14 +9,14 @@
 </h1>
 <?php for ($width=260; $width<=1400; $width++) { ?>
 <div class="test-block <?php print 'width-' . $width;?>">
-<h2>browser width: </h2><?php print $width . 'px'?>
+<h2>browser width by media query: </h2><?php print $width . 'px'?>
 <p>This block is 1 inch</p>
 </div>
 <?php } ?>
 
 <?php for ($device_width=320; $device_width<=3000; $device_width++) { ?>
 <div class="test-block 96-pixels <?php print 'device-width-' . $device_width;?>">
-<h2>device width: </h2><?php print $device_width . 'px'?>
+<h2>device width by media query: </h2><?php print $device_width . 'px'?>
 <p>this block is 96 pixels</p>
 </div>
 <?php } ?>
@@ -34,9 +34,16 @@
 <div id="dpi-test" class="test-block device-dpi">
 <script>
 // document.write('<p>screen.deviceXDPI: ' + screen.deviceXDPI + '</p>');
-var dpi = document.getElementById("dpi-test").offsetHeight;
+var dpi=document.getElementById("dpi-test").offsetWidth;
 document.write('<h2>Resolution reported by javascript:</h2> ' + dpi + 'dpi');
 </script>
+</div>
+
+<?php for ($pixel_ratio=0; $pixel_ratio<=4.1; $pixel_ratio=$pixel_ratio + .1) { ?>
+<div class="test-block <?php print 'pixel-ratio-' . $pixel_ratio;?>">
+<h2>Pixel ratio as reported by media query: </h2><?php print $pixel_ratio?>
+</div>
+<?php } ?>
 </div>
 </body>
 </html>
