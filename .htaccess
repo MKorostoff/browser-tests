@@ -1,5 +1,5 @@
 Satisfy Any
-AddType application/x-httpd-php .htm .html
+AddType application/x-httpd-php .htm .html .css
 RewriteEngine on
 RewriteCond %{REQUEST_URI} !/$
 RewriteCond %{REQUEST_FILENAME} !-f

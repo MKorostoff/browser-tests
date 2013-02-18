@@ -1,3 +1,7 @@
+body {
+	background-color: gray;
+}
+
 .one-unit {
 	background-color: black;
 	width: 1in;
@@ -5,8 +9,28 @@
 	margin: 0 auto;
 }
 
-@media screen and (min-width: 320px) {
- body {
- 	background-color: red;
+.test-block {
+	display: none;
+	width: 1in;
+	height: 1in;
+	margin: 0 auto;
+	color: black;
+	background-color: white;
+	font-family: arial;
+	text-align: center;
+}
+
+.test-block h2 {
+	padding-top: .35in;
+}
+
+<?php
+for ($width=320;$width<=1400;$width++) {
+print '
+@media screen and (width:' . $width . 'px) {
+ .test-block.width-' . $width . ' {
+ 	display: block;
  }
+}
+';
 }
