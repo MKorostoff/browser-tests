@@ -13,16 +13,23 @@ body {
 	display: none;
 	width: 1in;
 	height: 1in;
-	margin: 0 auto;
+	margin: 1em auto;
 	color: black;
 	background-color: white;
 	font-family: arial;
 	text-align: center;
 }
 
+.test-block.no-res {
+	display: block;
+}
+
 .test-block h2 {
+	display: table-cell;
+	height: 1in;
 	font-size: 13px;
-	padding-top: 40%;
+	vertical-align: middle;
+	text-align: center;
 }
 
 <?php
@@ -51,6 +58,9 @@ print '
 @media screen and (resolution:' . $resolution . 'dpi) {
  .test-block.resolution-' . $resolution . ' {
  	display: block;
+ }
+ .test-block.no-res {
+ 	display: none;
  }
 }
 ';
