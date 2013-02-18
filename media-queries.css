@@ -11,7 +11,7 @@ body {
 
 .test-block {
 	display: none;
-	width: 1in;
+	width: 96px;
 	height: 1in;
 	margin: 1em auto;
 	color: black;
