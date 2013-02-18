@@ -33,7 +33,6 @@
 
 <div id="dpi-test" class="test-block device-dpi">
 <script>
-// document.write('<p>screen.deviceXDPI: ' + screen.deviceXDPI + '</p>');
 var dpi=document.getElementById("dpi-test").offsetWidth;
 document.write('<h2>Resolution reported by javascript:</h2> ' + dpi + 'dpi');
 </script>
@@ -44,6 +43,11 @@ document.write('<h2>Resolution reported by javascript:</h2> ' + dpi + 'dpi');
 <h2>Pixel ratio as reported by media query: </h2><?php print $pixel_ratio?>
 </div>
 <?php } ?>
+
+<div class="test-block device-pixel-ratio">
+<script>
+document.write('<h2>Pixel ratio reported by javascript:</h2> ' + window.devicePixelRatio);
+</script>
 </div>
 </body>
 </html>

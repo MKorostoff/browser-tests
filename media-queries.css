@@ -26,7 +26,8 @@ body {
 }
 
 .test-block.no-res,
-.test-block.device-dpi {
+.test-block.device-dpi,
+.test-block.device-pixel-ratio {
 	display: block;
 }
 
