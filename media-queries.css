@@ -84,6 +84,9 @@ screen and (device-pixel-ratio:' . $pixel_ratio . ') {
  .test-block.pixel-ratio-' . $pixel_ratio . ' {
  	display: block;
  }
+ .test-block.no-pixel-ratio {
+ 	display: none;
+ }
 }
 ';
 }
